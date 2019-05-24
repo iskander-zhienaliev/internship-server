@@ -35,6 +35,10 @@ const jobSchema = mongoose.Schema({
 	companyImg: {
 		type: String,
 		required: true
+	},
+	created: {
+		type: Date,
+		default: Date.now
 	}
 });
 

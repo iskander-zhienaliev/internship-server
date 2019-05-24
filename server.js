@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const authRoute = require('./routes/auth');
 const postJob = require('./routes/postJob');
 const updateModel = require('./routes/update');
+const getUser = require('./routes/getUser');
 const db = require("./models");
 
 const API_PORT = process.env.PORT || 3000;
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 app.use('/auth', authRoute);
 app.use('/api', postJob);
 app.use('/update', updateModel);
+app.use('/get', getUser);
 
 app.use(function(req, res, next) {
 	let err = new Error("Not Found");
