@@ -25,6 +25,9 @@ const employeeSchema = mongoose.Schema({
 	},
 	companyImg: {
 		type: String
+	},
+	jobs: {
+		type: Array
 	}
 });
 
