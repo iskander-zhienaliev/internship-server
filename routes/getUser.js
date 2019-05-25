@@ -20,6 +20,20 @@ const getStudent = async function(req, res, next) {
 	}
 };
 
+const getJobs = async function(req, res, next) {
+	try {
+		const job = await db.Job.find({}, function (err, jobs) {
+			if (err) return err;
+			return res.send(jobs)
+		});
+		return res.status(200).json(job)
+	} catch (e) {
+		return next({ status: 400});
+	}
+};
+
+
+router.get('/jobs', getJobs);
 router.post('/employee', getEmployee);
 router.post('/student', getStudent);
 
