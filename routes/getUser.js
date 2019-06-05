@@ -5,7 +5,7 @@ const router = express.Router();
 const getEmployee = async function(req, res, next) {
 	try {
 		const employee = await db.Employee.findOne({email: req.body.email});
-		return res.status(200).json(employee)
+		res.status(200).json(employee)
 	} catch (e) {
 		return next({ status: 400});
 	}
@@ -13,8 +13,8 @@ const getEmployee = async function(req, res, next) {
 
 const getStudent = async function(req, res, next) {
 	try {
-		await db.Student.findOne({email: req.body.email});
-		return res.status(200).json(res)
+		const student =  await db.Student.findOne({email: req.body.email});
+		res.status(200).json(student)
 	} catch (e) {
 		return next({ status: 400});
 	}
@@ -23,10 +23,12 @@ const getStudent = async function(req, res, next) {
 const getJobs = async function(req, res, next) {
 	try {
 		const job = await db.Job.find({}, function (err, jobs) {
-			if (err) return err;
+			if (err) {
+				return err
+			}
 			return res.send(jobs)
 		});
-		return res.status(200).json(job)
+		res.status(200).json(job)
 	} catch (e) {
 		return next({ status: 400});
 	}

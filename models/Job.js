@@ -36,6 +36,9 @@ const jobSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	companyEmail: {
+		type: String
+	},
 	created: {
 		type: Date,
 		default: Date.now

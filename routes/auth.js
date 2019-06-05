@@ -24,7 +24,7 @@ const signin = async function(req, res, next) {
 				},
 				'qwerty123456789'
 			);
-			return res.status(200).json({
+			res.status(200).json({
 				token
 			});
 		} else {
