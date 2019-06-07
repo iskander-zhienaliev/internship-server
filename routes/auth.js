@@ -15,7 +15,8 @@ const signin = async function(req, res, next) {
 		// if (isStudent) {
 		// } else {
 		// }
-		const { jobs, ...clone } = user;
+		const clone = await Object.assign({}, user);
+		await delete clone.jobs;
 		let isMatch = await user.comparePassword(req.body.password);
 		if (isMatch) {
 			let token = jwt.sign(
@@ -47,7 +48,8 @@ const signup = async function(req, res, next) {
 		} else {
 			user = await db.Employee.create(req.body);
 		}
-		const { jobs, ...clone } = user;
+		const clone = await Object.assign({}, user);
+		await delete clone.jobs;
 		jwt.sign(
 			{
 				clone
