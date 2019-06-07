@@ -7,13 +7,12 @@ const signin = async function(req, res, next) {
 	// finding a user
 	try {
 		// const isStudent = req.body.isStudent;
-		let user;
+		const user = await db.Student.findOne({
+			email: req.body.email
+		}) || await db.Employee.findOne({
+			email: req.body.email
+		});
 		// if (isStudent) {
-			user = await db.Student.findOne({
-				email: req.body.email
-			}) || await db.Employee.findOne({
-				email: req.body.email
-			});
 		// } else {
 		// }
 		let isMatch = await user.comparePassword(req.body.password);
