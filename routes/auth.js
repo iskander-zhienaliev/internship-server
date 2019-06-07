@@ -15,13 +15,18 @@ const signin = async function(req, res, next) {
 		// if (isStudent) {
 		// } else {
 		// }
-		const clone = await Object.assign({}, user);
-		await delete clone.jobs;
+		const { email, password, firstName, lastName, studyPlace, company, area } = user
 		let isMatch = await user.comparePassword(req.body.password);
 		if (isMatch) {
 			let token = jwt.sign(
 				{
-					clone
+					...(email && {email}),
+					...(password && {password}),
+					...(firstName && {firstName}),
+					...(lastName && {lastName}),
+					...(studyPlace && {studyPlace}),
+					...(company && {company}),
+					...(area && {area}),
 				},
 				'qwerty123456789'
 			);
@@ -48,11 +53,16 @@ const signup = async function(req, res, next) {
 		} else {
 			user = await db.Employee.create(req.body);
 		}
-		const clone = await Object.assign({}, user);
-		await delete clone.jobs;
+		const { email, password, firstName, lastName, studyPlace, company, area } = user
 		jwt.sign(
 			{
-				clone
+				...(email && {email}),
+				...(password && {password}),
+				...(firstName && {firstName}),
+				...(lastName && {lastName}),
+				...(studyPlace && {studyPlace}),
+				...(company && {company}),
+				...(area && {area}),
 			},
 			'qwerty123456789',
 			(err, token) => {
