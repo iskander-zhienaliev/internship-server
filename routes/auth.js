@@ -15,12 +15,12 @@ const signin = async function(req, res, next) {
 		// if (isStudent) {
 		// } else {
 		// }
-		console.log(user)
+		const { email } = user;
 		let isMatch = await user.comparePassword(req.body.password);
 		if (isMatch) {
 			let token = jwt.sign(
 				{
-					user
+					email
 				},
 				'qwerty123456789'
 			);
@@ -47,9 +47,10 @@ const signup = async function(req, res, next) {
 		} else {
 			user = await db.Employee.create(req.body);
 		}
+		const { email } = user;
 		jwt.sign(
 			{
-				user
+				email
 			},
 			'qwerty123456789',
 			(err, token) => {
