@@ -15,6 +15,7 @@ const signin = async function(req, res, next) {
 		// if (isStudent) {
 		// } else {
 		// }
+		console.log(user)
 		let isMatch = await user.comparePassword(req.body.password);
 		if (isMatch) {
 			let token = jwt.sign(
