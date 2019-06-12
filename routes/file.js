@@ -21,6 +21,7 @@ const upload = multer({
 });
 
 fileRouter.route('uploadfile').post(upload.single('fileData'), async (req, res, next) => {
+	console.log(req, 'll')
 	const newFile = await new fileModel({
 		fileName: req.body.fileName,
 		fileData: req.file.path
