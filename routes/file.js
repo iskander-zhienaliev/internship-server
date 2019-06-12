@@ -33,3 +33,5 @@ fileRouter.route('uploadfile').post(upload.single('fileData'), async (req, res, 
 		})
 	}).catch(err => next(err))
 });
+
+module.exports = fileRouter;
