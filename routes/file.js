@@ -1,5 +1,5 @@
 const express = require('express');
-const fileRouter = express.Router();
+const router = express.Router();
 const multer = require('multer');
 const fileModel = require("../models/File");
 
@@ -20,7 +20,7 @@ const upload = multer({
 	}
 });
 
-fileRouter.route('uploadfile').post(upload.single('fileData'), async (req, res, next) => {
+router.post('/uploadfile', upload.single('fileData'), async (req, res, next) => {
 	console.log(req, 'll')
 	const newFile = await new fileModel({
 		fileName: req.body.fileName,
@@ -35,4 +35,5 @@ fileRouter.route('uploadfile').post(upload.single('fileData'), async (req, res, 
 	}).catch(err => next(err))
 });
 
-module.exports = fileRouter;
+
+module.exports = router;

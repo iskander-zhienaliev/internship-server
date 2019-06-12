@@ -6,7 +6,7 @@ const authRoute = require('./routes/auth');
 const postJob = require('./routes/postJob');
 const updateModel = require('./routes/update');
 const getUser = require('./routes/getUser');
-const fileRouter = require('./routes/file');
+const file = require('./routes/file');
 const db = require("./models");
 
 const API_PORT = process.env.PORT || 3000;
@@ -19,7 +19,7 @@ app.use('/auth', authRoute);
 app.use('/api', postJob);
 app.use('/update', updateModel);
 app.use('/get', getUser);
-app.use('/file', fileRouter);
+app.use('/file', file);
 app.use('/uploads', express.static('uploads'));
 
 app.use(function(req, res, next) {
