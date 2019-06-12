@@ -19,3 +19,4 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 module.exports.Student = require("./Student");
 module.exports.Employee = require("./Employee");
 module.exports.Job = require("./Job");
+module.exports.File = require("./File");
