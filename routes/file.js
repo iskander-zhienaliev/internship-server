@@ -25,17 +25,7 @@ router.post('/uploadfile', async (req, res, next) => {
 		} else if (err) {
 			return res.status(500).json(err)
 		}
-		const newFile = new fileModel({
-			fileName: req.body.fileName,
-			fileData: req.file.path
-		});
-
-		newFile.save().then((result) => {
-			res.status(200).json({
-				success: true,
-				result: result
-			})
-		}).catch(err => next(err))
+		return res.status(200).send(req.file)
 	})
 });
 
