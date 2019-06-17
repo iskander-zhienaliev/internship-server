@@ -40,7 +40,7 @@ const upload = multer({
 	storage: storage
 });
 
-app.post('/uploadfile', async (req, res, next) => {
+app.post('/files', async (req, res, next) => {
 	upload.single('file')(req, res, function(err) {
 		if (err instanceof multer.MulterError) {
 			return res.status(500).json(err)
