@@ -21,7 +21,7 @@ app.use('/api', postJob);
 app.use('/update', updateModel);
 app.use('/get', getUser);
 app.use('/file', file);
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('public'));
 
 app.use(function(req, res, next) {
 	let err = new Error("Not Found");
