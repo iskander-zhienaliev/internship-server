@@ -10,15 +10,12 @@ const storage = multer.diskStorage({
 		cb(null, 'uploads/')
 	},
 	filename: function (req, file, cb) {
-		cb(null, file.originalname)
+		cb(null, file.fieldname + '-' + Date.now())
 	}
 });
 
 const upload = multer({
-	storage: storage,
-	limits: {
-		fileSize: 1024 * 1024 * 5
-	}
+	storage: storage
 });
 
 router.post('/uploadfile', upload.single('fileData'), async (req, res, next) => {
