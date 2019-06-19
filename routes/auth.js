@@ -43,34 +43,31 @@ const signin = async function (req, res, next) {
 
 const signup = async function (req, res, next) {
 	try {
-		const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			const isStudent = req.body.isStudent;
-			let user;
-			if (isStudent) {
-				user = await db.Student.create(req.body);
-			} else {
-				user = await db.Employee.create(req.body);
-			}
-			const {email, password, firstName, lastName, studyPlace, company, area} = user
-			jwt.sign(
-				{
-					...(email && {email}),
-					...(password && {password}),
-					...(firstName && {firstName}),
-					...(lastName && {lastName}),
-					...(studyPlace && {studyPlace}),
-					...(company && {company}),
-					...(area && {area}),
-				},
-				'qwerty123456789',
-				(err, token) => {
-					res.status(200).json({
-						token
-					})
-				}
-			);
+		const isStudent = req.body.isStudent;
+		let user;
+		if (isStudent) {
+			user = await db.Student.create(req.body);
+		} else {
+			user = await db.Employee.create(req.body);
 		}
+		const {email, password, firstName, lastName, studyPlace, company, area} = user
+		jwt.sign(
+			{
+				...(email && {email}),
+				...(password && {password}),
+				...(firstName && {firstName}),
+				...(lastName && {lastName}),
+				...(studyPlace && {studyPlace}),
+				...(company && {company}),
+				...(area && {area}),
+			},
+			'qwerty123456789',
+			(err, token) => {
+				res.status(200).json({
+					token
+				})
+			}
+		);
 	} catch (err) {
 		if (err.code === 11000) {
 			err.message = "Sorry, that username and/or email is taken";
