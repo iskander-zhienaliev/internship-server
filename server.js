@@ -20,7 +20,7 @@ app.use('/auth', authRoute);
 app.use('/api', postJob);
 app.use('/update', updateModel);
 app.use('/get', getUser);
-app.use('/uploads', express.static(process.env.PWD+'/static'));
+app.use('/uploads', express.static(process.env.PWD+'static'));
 
 app.use(function(req, res, next) {
 	let err = new Error("Not Found");
