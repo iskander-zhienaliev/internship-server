@@ -24,14 +24,27 @@ app.use('/update', updateModel);
 app.use('/get', getUser);
 
 const storage = require('multer-gridfs-storage')({
-	url: dbRoute
+	url: dbRoute,
+	file: (req, file) => {
+		return {
+			bucketName: 'test',
+			fileName: file.originalname
+		}
+	}
 });
 
-const upload = multer({storage: storage});
-const sUpload = upload.single('file');
+let upload = null;
+storage.on('connection', (db)=> {
+	upload = multer({storage: storage}).single('file');
+})
 
-app.post('/file', sUpload, (req, res, next) => {
-	console.log(req, res)
+app.post('/file', (req, res, next) => {
+	upload(req, res, (err) => {
+		if (err) => {
+			return res.render('index', {title: 'Uploaded Error', message: 'File could not be uploaded', error: err});
+		}
+		res.render('index', {title: 'Uploaded', message: `File ${req.file.filename} has been uploaded!`});
+	})
 })
 
 app.use(function(req, res, next) {
