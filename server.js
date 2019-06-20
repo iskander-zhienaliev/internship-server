@@ -40,7 +40,7 @@ storage.on('connection', (db)=> {
 
 app.post('/file', (req, res, next) => {
 	upload(req, res, (err) => {
-		if (err) => {
+		if (err) {
 			return res.render('index', {title: 'Uploaded Error', message: 'File could not be uploaded', error: err});
 		}
 		res.render('index', {title: 'Uploaded', message: `File ${req.file.filename} has been uploaded!`});
