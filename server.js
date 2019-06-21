@@ -30,7 +30,11 @@ const storage = require('multer-gridfs-storage')({
 			bucketName: 'test',
 			fileName: file.originalname
 		}
-	}
+	},
+	metadata: function(req, file, cb) {
+		cb(null, { originalname: file.originalname });
+	},
+	root: 'files'
 });
 
 let upload = null;
