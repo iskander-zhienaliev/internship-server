@@ -16,6 +16,7 @@ db.once("open", () => console.log("connected to the database"));
 
 // checks if connection with the database is successful
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
+const Student = require('./Student');
 
 module.exports.Student = require("./Student");
 module.exports.Employee = require("./Employee");
@@ -46,7 +47,6 @@ const storage = require('multer-gridfs-storage')({
 				});
 			}
 		});
-		console.log(file)
 		return {
 			filename: file.originalname,
 			bucketName: 'pdf'
@@ -66,6 +66,39 @@ module.exports.postFile = (req, res, next) => {
 			return res.json({title: 'Uploaded Error', message: 'File could not be uploaded', error: err});
 		}
 		res.json({title: 'Uploaded', message: `File ${req.file.originalname} has been uploaded!`});
+	})
+};
+
+module.exports.getStudents = (req, res) => {
+	collection.find().toArray(async function (err, docs) {
+		if (err) {
+			return res.json({title: 'file error', message: 'No file found'})
+		}
+		if (!docs || docs.length === 0) {
+			return res.json({title: 'Download Error', message: 'No file found'});
+		} else {
+			const acc = [];
+			for (const doc of docs) {
+				const student = await Student.findOne({email: doc.filename}).then(user=>{
+					const {email, firstName, lastName, year, studyPlace, spec, photo} = user;
+					return {
+						...(email && {email}),
+						...(firstName && {firstName}),
+						...(lastName && {lastName}),
+						...(year && {year}),
+						...(studyPlace && {studyPlace}),
+						...(spec && {spec}),
+						...(photo && {photo})
+					}
+				})
+				await acc.push(student);
+				// await collectionChunks.find({files_id: doc._id}).toArray(function (err, chunks) {
+				// 	student.file = 'data:' + doc.contentType + ';base64,' + chunks[0].data.toString('base64');
+				// 	acc.push(student);
+				// });
+			}
+			res.json(acc)
+		}
 	})
 };
 

@@ -22,6 +22,7 @@ app.use('/update', updateModel);
 app.use('/get', getUser);
 app.use('/file', db.postFile);
 app.use('/getFile', db.getFile);
+app.use('/getStudents', db.getStudents);
 
 app.use(function (req, res, next) {
 	let err = new Error("Not Found");

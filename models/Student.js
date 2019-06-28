@@ -38,6 +38,9 @@ const studentSchema = mongoose.Schema({
 	spec: {
 		type: String
 	},
+	photo: {
+		type: String
+	},
 	CV: {
 		type: Boolean
 	}
