@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const jobSchema = mongoose.Schema({
 	name: {
@@ -39,11 +40,16 @@ const jobSchema = mongoose.Schema({
 	companyEmail: {
 		type: String
 	},
+	email: {
+		type: String
+	},
 	created: {
 		type: Date,
 		default: Date.now
 	}
 });
+
+jobSchema.plugin(AutoIncrement, {inc_field: 'id'});
 
 const Job = mongoose.model('Job', jobSchema);
 

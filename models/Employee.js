@@ -27,6 +27,9 @@ const employeeSchema = mongoose.Schema({
 	},
 	jobs: {
 		type: Array
+	},
+	messages: {
+		email: [{created: Date, text: String, isMy: Boolean}]
 	}
 });
 

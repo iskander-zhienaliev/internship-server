@@ -43,10 +43,13 @@ const studentSchema = mongoose.Schema({
 	},
 	CV: {
 		type: Boolean
+	},
+	messages: {
+		email: [{created: Date, text: String, isMy: Boolean}]
 	}
 });
 
-studentSchema.pre("save", async function(next) {
+studentSchema.pre("save", async function (next) {
 	try {
 		if (!this.isModified("password")) {
 			return next();
@@ -59,7 +62,7 @@ studentSchema.pre("save", async function(next) {
 	}
 });
 
-studentSchema.methods.comparePassword = async function(candidatePassword, next) {
+studentSchema.methods.comparePassword = async function (candidatePassword, next) {
 	try {
 		let isMatch = await bcrypt.compare(candidatePassword, this.password);
 		return isMatch;

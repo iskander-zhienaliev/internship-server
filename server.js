@@ -5,6 +5,7 @@ const authRoute = require('./routes/auth');
 const postJob = require('./routes/postJob');
 const updateModel = require('./routes/update');
 const getUser = require('./routes/getUser');
+const message = require('./routes/message');
 const db = require("./models");
 
 const API_PORT = process.env.PORT || 3000;
@@ -20,6 +21,7 @@ app.use('/auth', authRoute);
 app.use('/api', postJob);
 app.use('/update', updateModel);
 app.use('/get', getUser);
+app.use('/message', message);
 app.use('/file', db.postFile);
 app.use('/getFile', db.getFile);
 app.use('/getStudents', db.getStudents);

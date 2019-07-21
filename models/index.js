@@ -22,6 +22,7 @@ module.exports.Student = require("./Student");
 module.exports.Employee = require("./Employee");
 module.exports.Job = require("./Job");
 module.exports.File = require("./File");
+module.exports.Message = require("./Message");
 
 const collection = db.collection('pdf.files');
 const collectionChunks = db.collection('pdf.chunks');
