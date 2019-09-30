@@ -5,4 +5,4 @@ services:
     container_name: internship_server
     build: .
     ports:
-      - '80:3000'
+      - '3000:3000'
