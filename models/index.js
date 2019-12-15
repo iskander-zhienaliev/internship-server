@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const multer = require('multer');
-const dbRoute = "mongodb+srv://Slargar:sparksv@cluster0-razvx.mongodb.net/test?retryWrites=true\n";
+const dbRoute = "mongodb://mongo:27017/test";
 mongoose.set("debug", true);
 
 mongoose.Promise = Promise;
