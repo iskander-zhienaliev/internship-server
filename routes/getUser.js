@@ -20,6 +20,15 @@ const getStudent = async function(req, res, next) {
 	}
 };
 
+const getEmployees = async function (req, res, next) {
+	try {
+		const employees = await db.Employee.find({});
+		res.send(employees)
+	} catch (e) {
+		return next({status: 400})
+	}
+}
+
 const getJobs = async function(req, res, next) {
 	try {
 		const job = await db.Job.find({});
@@ -33,5 +42,6 @@ const getJobs = async function(req, res, next) {
 router.get('/jobs', getJobs);
 router.post('/employee', getEmployee);
 router.post('/student', getStudent);
+router.get('/employees', getEmployees);
 
 module.exports = router;
