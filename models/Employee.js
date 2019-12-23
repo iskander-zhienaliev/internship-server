@@ -28,6 +28,9 @@ const employeeSchema = mongoose.Schema({
 	jobs: {
 		type: Array
 	},
+	city: {
+		type: String
+	},
 	messages: {
 		email: [{created: Date, text: String, isMy: Boolean}]
 	}

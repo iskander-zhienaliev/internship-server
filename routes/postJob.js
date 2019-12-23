@@ -14,7 +14,6 @@ const postJob = async function(req, res, next) {
 
 const deleteJob = async function(req, res, next) {
 	try {
-		console.log(req)
 		await db.Job.findByIdAndDelete(req.body._id);
 		await db.Employee.updateOne({email: req.body.email}, { $pull: {jobs: {id: req.body.id} } });
 		res.status(200)
